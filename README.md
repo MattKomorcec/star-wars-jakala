@@ -1,1 +1,1 @@
-# star-wars-jakala
+# Star Wars | Jakala
