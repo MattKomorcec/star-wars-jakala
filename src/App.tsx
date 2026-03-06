@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom"
 import { PeopleDetails } from "./people/details"
 import { FilmsList } from "./films/list"
 import { FilmDetails } from "./films/details"
+import { PageNotFound } from "./404"
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/" element={<FilmsList />} />
         <Route path="/films/:id" element={<FilmDetails />} />
         <Route path="/people/:id" element={<PeopleDetails />} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </div>
   )
