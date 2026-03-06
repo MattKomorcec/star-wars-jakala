@@ -1,6 +1,6 @@
 import type { Film } from "./types";
 
-function FilmSpecifics({ film }: { film: Film }) {
+function FilmStats({ film }: { film: Film }) {
   return (
     <div className="grid grid-cols-3 gap-4 text-center">
       {[
@@ -18,4 +18,4 @@ function FilmSpecifics({ film }: { film: Film }) {
   )
 }
 
-export { FilmSpecifics }
+export { FilmStats }

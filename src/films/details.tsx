@@ -1,32 +1,11 @@
-import { useState } from "react"
 import { useParams, Link } from "react-router-dom"
-import { useQueries } from "@tanstack/react-query"
 import { useGetFilmDetails } from "./hooks/use-get-film-details"
-import type { Person } from "../people/types"
-import { extractIdFromUrl } from "../util"
-import { FilmSpecifics } from "./film-specifics"
+import { FilmStats } from "./film-stats"
+import { FilmCharacters } from "./characters"
 
 function FilmDetails() {
   const { id } = useParams<{ id: string }>()
   const { data, isLoading, isError } = useGetFilmDetails(id ?? "")
-  const [showCharacters, setShowCharacters] = useState(false)
-
-  const characterIds = data?.characters.map((url) => extractIdFromUrl(url)) ?? []
-
-  const characterQueries = useQueries({
-    queries: characterIds.map((id) => ({
-      queryKey: ["people", id],
-      queryFn: async (): Promise<Person> => {
-        const res = await fetch(`https://swapi.dev/api/people/${id}/`)
-        if (!res.ok) throw new Error("Failed to fetch character")
-        return res.json()
-      },
-      enabled: showCharacters,
-    })),
-  })
-
-  const characters = characterQueries.map((q) => q.data).filter(Boolean) as Person[]
-  const charactersLoading = characterQueries.some((q) => q.isLoading)
 
   if (isLoading) {
     return <p className="text-text-muted text-center mt-20">Loading...</p>
@@ -67,27 +46,9 @@ function FilmDetails() {
         </div>
       </div>
 
-      <div className="bg-surface rounded-xl p-4 border border-surface-alt space-y-3">
-        <p className="text-yellow text-2xl font-bold">{data.characters.length}</p>
-        <p className="text-text-muted text-xs uppercase mt-1">Characters</p>
-        <button className="text-blue text-sm underline hover:text-gold cursor-pointer" onClick={() => setShowCharacters(!showCharacters)}>
-          View all characters
-        </button>
-        {showCharacters && (
-          <ul className="mt-2 space-y-1">
-            {charactersLoading && <li className="text-text-muted text-sm">Loading characters...</li>}
-            {characters.map((person) => (
-              <li key={person.url}>
-                <Link to={`/people/${extractIdFromUrl(person.url)}`} className="text-text text-sm hover:text-gold">
-                  - {person.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+      <FilmCharacters characterUrls={data.characters} />
 
-      <FilmSpecifics film={data} />
+      <FilmStats film={data} />
     </div>
   )
 }

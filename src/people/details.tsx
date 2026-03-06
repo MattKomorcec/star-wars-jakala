@@ -25,19 +25,25 @@ function PeopleDetails() {
       </button>
       <h2 className="text-yellow mt-6">{data.name}</h2>
       <div className="bg-surface rounded-xl p-6 border border-surface-alt">
-        <p className="text-text-muted text-sm leading-relaxed italic text-center whitespace-pre-line">
+        <p className="text-text-muted text-sm italic text-center">
           Birth year: {data.birth_year}
-          <br />
+        </p>
+        <p className="text-text-muted text-sm italic text-center">
           Height: {data.height}
-          <br />
+        </p>
+        <p className="text-text-muted text-sm italic text-center">
           Mass: {data.mass}
-          <br />
+        </p>
+        <p className="text-text-muted text-sm italic text-center">
           Hair color: {data.hair_color}
-          <br />
+        </p>
+        <p className="text-text-muted text-sm italic text-center">
           Skin color: {data.skin_color}
-          <br />
+        </p>
+        <p className="text-text-muted text-sm italic text-center">
           Eye color: {data.eye_color}
-          <br />
+        </p>
+        <p className="text-text-muted text-sm italic text-center">
           Gender: {data.gender}
         </p>
       </div>

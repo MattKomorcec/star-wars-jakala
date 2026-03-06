@@ -2,4 +2,4 @@ echo "-> Running the linter..."
 npm run lint
 
 echo "-> Running the tests..."
-npm test
+npm run test

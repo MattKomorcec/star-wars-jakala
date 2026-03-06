@@ -9,8 +9,8 @@ function FilmCard({ film }: { film: Film }) {
       <p>Directed by: {film.director}</p>
       <p>Produced by: {film.producer}</p>
       <p>Release date: {film.release_date}</p>
-      <Link to={`/films/${extractIdFromUrl(film.url)}`} className="text-blue mt-2 inline-block underline hover:text-gold">
-        See more
+      <Link to={`/films/${extractIdFromUrl(film.url)}`} className="text-blue mt-2 inline-block underline hover:text-gold" aria-label={`Read more about ${film.title}`}>
+        Read more
       </Link>
     </div>
   )
